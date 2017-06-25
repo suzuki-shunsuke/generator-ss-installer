@@ -2,10 +2,21 @@
 
 set -e
 
-cd `dirname $0`
+basename=`basename $0`
 
-ghq import < repos.txt
-for line in `cat repos.txt`; do
-  cd `ghq list -p $line`
-  npm link
-done
+if [ $basename == 'installer' ]; then
+  cd `dirname $0`
+  
+  ghq import < repos.txt
+  for line in `cat repos.txt`; do
+    cd `ghq list -p $line`
+    npm link
+  done
+else
+  for line in `curl https://raw.githubusercontent.com/suzuki-shunsuke/generator-ss-installer/master/repos.txt`; do
+    echo $line
+    ghq get $line
+    cd `ghq list -p $line`
+    npm link
+  done
+fi
