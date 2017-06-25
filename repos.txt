@@ -1,0 +1,2 @@
+suzuki-shunsuke/generator-ss-gulp
+suzuki-shunsuke/generator-ss-validate-commit-msg

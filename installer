@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+cd `dirname $0`
+
+ghq import < repos.txt
+for line in `cat repos.txt`; do
+  cd `ghq list -p $line`
+  npm link
+done
